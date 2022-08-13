@@ -1,0 +1,154 @@
+<template>
+    <div class="account-pages my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-4">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <div class="text-center mb-4">
+                                <h4 class="text-uppercase mt-0">Sign In</h4>
+                            </div>
+                            <div
+                                class="col-12"
+                                v-if="Object.keys(validationErrors).length > 0"
+                            >
+                                <div class="alert alert-danger">
+                                    <ul class="mb-0">
+                                        <li
+                                            v-for="(
+                                                value, key
+                                            ) in validationErrors"
+                                            :key="key"
+                                        >
+                                            {{ value[0] }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <form action="javascript:void(0)" method="post">
+                                <div class="mb-3">
+                                    <label for="emailaddress" class="form-label"
+                                        >Email address</label
+                                    >
+                                    <input
+                                        class="form-control"
+                                        type="email"
+                                        id="emailaddress"
+                                        required=""
+                                        v-model="auth.email"
+                                        placeholder="Enter your email"
+                                    />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password" class="form-label"
+                                        >Password</label
+                                    >
+                                    <input
+                                        class="form-control"
+                                        type="password"
+                                        required=""
+                                        id="password"
+                                        v-model="auth.password"
+                                        placeholder="Enter your password"
+                                    />
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input
+                                            type="checkbox"
+                                            class="form-check-input"
+                                            id="checkbox-signin"
+                                            checked
+                                        />
+                                        <label
+                                            class="form-check-label"
+                                            for="checkbox-signin"
+                                            >Remember me</label
+                                        >
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 d-grid text-center">
+                                    <button
+                                        class="btn btn-primary"
+                                        @click="login"
+                                    >
+                                        {{
+                                            processing
+                                                ? "Please wait"
+                                                : "Log In"
+                                        }}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12 text-center">
+                            <p>
+                                <a href="#" class="text-muted ms-1"
+                                    ><i class="fa fa-lock me-1"></i>Forgot your
+                                    password?</a
+                                >
+                            </p>
+                            <p class="text-muted">
+                                Don't have an account?
+                                <a href="#" class="text-dark ms-1"
+                                    ><b>Sign Up</b></a
+                                >
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { mapActions } from "vuex";
+export default {
+    data() {
+        return {
+            auth: {
+                email: "",
+                password: "",
+            },
+            validationErrors: {},
+            processing: false,
+        };
+    },
+    methods: {
+        ...mapActions({
+            signIn: "login",
+        }),
+        login() {
+            this.processing = true;
+            axios
+                .post("api/login", this.auth)
+                .then(({ data }) => {
+                    localStorage.setItem("token", data.authorization.token);
+                    this.signIn(data);
+                })
+                .catch(({ response }) => {
+                    console.log(response);
+                    if (response.status === 422) {
+                        this.validationErrors = response.data.errors;
+                    } else {
+                        this.validationErrors = {};
+                        alert(response.data.message);
+                    }
+                })
+                .finally(() => {
+                    this.processing = false;
+                });
+        },
+    },
+};
+</script>
+
+<style></style>
