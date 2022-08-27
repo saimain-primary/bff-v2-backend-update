@@ -39,11 +39,11 @@ const store = createStore({
                 const loginData = await axios.get("/api/user");
                 commit("SET_USER", loginData);
                 commit("SET_AUTHENTICATED", true);
-                router.go("/");
                 toast.success("Welcome Back!", {
                     transition: "Vue-Toastification__bounce",
                     hideProgressBar: true,
                 });
+                router.push({ name: "dashboard" });
             } catch (error) {
                 console.log(error);
                 commit("SET_USER", {});
@@ -62,26 +62,47 @@ const store = createStore({
 
         // Admin
         async createNewAdminAction({ commit }, data) {
-            const result = await axios.post("/api/admins", data);
-            if (result.status == 500)
+            try {
+                const result = await axios.post("/api/admins", data);
+                toast.success(result.data.message, {
+                    transition: "Vue-Toastification__bounce",
+                    hideProgressBar: true,
+                });
+
                 return {
-                    success: false,
-                    data: [],
+                    success: true,
+                    data: result,
                     message: result.message,
-                    error: [],
+                    errors: [],
                 };
+            } catch (error) {
+                console.log("error > ", error);
+                if (error.response.status == 422) {
+                    toast.error(error.response.data.message, {
+                        transition: "Vue-Toastification__bounce",
+                        hideProgressBar: true,
+                    });
 
-            toast.success(result.data.message, {
-                transition: "Vue-Toastification__bounce",
-                hideProgressBar: true,
-            });
+                    return {
+                        success: false,
+                        data: [],
+                        message: error.response.data.message,
+                        errors: error.response.data.errors,
+                    };
+                } else {
+                    toast.error("Something went wrong.", {
+                        transition: "Vue-Toastification__bounce",
+                        hideProgressBar: true,
+                    });
 
-            return {
-                success: true,
-                data: result,
-                message: result.message,
-                error: [],
-            };
+                    return {
+                        success: false,
+                        data: [],
+                        message: error.response.data.message,
+                        errors: [],
+                    };
+                }
+            }
         },
     },
 });

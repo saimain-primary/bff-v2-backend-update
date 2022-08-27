@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['login','register','me']]);
     }
 
     public function user(Request $request)
@@ -51,8 +51,6 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-
-
         return response()->json([
                 'status' => 'success',
                 'user' => $user,
@@ -61,10 +59,10 @@ class AuthController extends Controller
                     'type' => 'bearer',
                 ]
             ]);
-
     }
 
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -98,6 +96,32 @@ class AuthController extends Controller
             'status' => 'success',
             'message' => 'Successfully logged out',
         ]);
+    }
+
+    public function me()
+    {
+        $authUser = Auth::guard('api')->user();
+        if ($authUser) {
+            $user = User::with('role')->find($authUser->id);
+            return response()->json([
+                'status' => 200,
+                'message' => 'Authenticated',
+                'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'email_verified_at' => $user->email_verified_at,
+                'created_at' => $user->created_at,
+                'updated_at' => $user->updated_at,
+                'role' => $user->role->name
+            ],
+            ]);
+        } else {
+            return response()->json([
+                'status' => 401,
+                'message' => 'Unauthenticated',
+            ]);
+        }
     }
 
     public function refresh()

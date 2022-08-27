@@ -6,6 +6,7 @@ import AddClient from "./pages/clients/AddClient.vue";
 import Dashboard from "./pages/Dashboard.vue";
 import Login from "./pages/auth/Login.vue";
 import store from "./store";
+import axios from "axios";
 
 const routes = [
     {
@@ -71,6 +72,29 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const isAuth = store.state.authenticated;
+
+    if (isAuth) {
+        const authToken = localStorage.getItem("token");
+        axios
+            .get("/api/me", {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                },
+            })
+            .then((res) => {
+                if (res.data.status !== 200) {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("vuex");
+                    store.state.authenticated = false;
+                    store.state.user = {};
+                    router.push({ path: "/login" });
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
     let role = "";
     if (isAuth) {
         role = store.state.user.data.user.role;

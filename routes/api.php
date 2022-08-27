@@ -20,8 +20,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
     Route::post('register', 'register');
     Route::post('logout', 'logout');
+    Route::get('me', 'me');
     Route::post('refresh', 'refresh');
 });
+
 
 
 Route::group(['middleware' => ['auth:api','role:SUPER_ADMIN']], function () {
