@@ -61,6 +61,33 @@ const store = createStore({
         },
 
         // Admin
+        async getAdminListAction({ commit }, data) {
+            try {
+                const result = await axios.get("/api/admins", {
+                    params: data,
+                });
+
+                return {
+                    success: true,
+                    data: result.data,
+                    message: result.message,
+                    errors: [],
+                };
+            } catch (error) {
+                console.log("error > ", error);
+                toast.error("Something went wrong.", {
+                    transition: "Vue-Toastification__bounce",
+                    hideProgressBar: true,
+                });
+
+                return {
+                    success: false,
+                    data: [],
+                    message: error.response.data.message,
+                    errors: [],
+                };
+            }
+        },
         async createNewAdminAction({ commit }, data) {
             try {
                 const result = await axios.post("/api/admins", data);

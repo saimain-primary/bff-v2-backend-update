@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -94,4 +95,19 @@ class User extends Authenticatable implements JWTSubject
         }
         return false;
     }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+     public function getCreatedAtAttribute($value)
+     {
+         return Carbon::parse($value)->format('d/m/Y h:m A');
+     }
+
+       public function getUpdatedAtAttribute($value)
+       {
+           return Carbon::parse($value)->format('d/m/Y h:m A');
+       }
 }

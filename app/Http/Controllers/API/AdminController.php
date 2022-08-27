@@ -26,7 +26,7 @@ class AdminController extends Controller
     {
         $perPage = $request->perPage ? $request->perPage : 10;
 
-        $admins = User::where('role_id', 2)->paginate($perPage);
+        $admins = User::where('role_id', 2)->with('createdBy')->paginate($perPage);
         $responseData = [
             "message" => "Successfully fetch admins",
             "results" => $admins,
