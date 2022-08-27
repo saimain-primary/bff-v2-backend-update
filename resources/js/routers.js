@@ -40,7 +40,7 @@ const routes = [
         path: "/admins/add",
         component: AddAdmin,
         meta: {
-            title: `Add Admin`,
+            title: `Create new Admin account`,
             middleware: "super_admin",
         },
     },

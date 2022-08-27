@@ -17,9 +17,13 @@
         "vue-loader": "^16.8.3"
     },
     "dependencies": {
+        "feather-icons": "^4.29.0",
         "vue": "^3.2.37",
         "vue-axios": "^3.4.1",
+        "vue-feather": "^2.0.0",
+        "vue-feather-icons": "^5.1.0",
         "vue-router": "^4.0.13",
+        "vue-toastification": "^2.0.0-rc.5",
         "vuex": "^4.0.2",
         "vuex-persistedstate": "^4.1.0"
     }

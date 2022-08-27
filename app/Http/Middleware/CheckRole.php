@@ -16,9 +16,24 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, $role)
     {
+        if (!$request->user()) {
+            return response()->json([
+                    "message" => "Unauthorized",
+                    "results" => null,
+                    "links" => [
+                        "user" => "/admins/{id}"
+                    ]
+                    ], 401);
+        }
 
-        if (! $request->user()->hasRole($role)) {
-            abort(401, 'This action is unauthorized.');
+        if (!$request->user()->hasRole($role)) {
+            return response()->json([
+                "message" => "Unauthorized",
+                "results" => null,
+                "links" => [
+                    "user" => "/admins/{id}"
+                ]
+                ], 401);
         }
         return $next($request);
     }

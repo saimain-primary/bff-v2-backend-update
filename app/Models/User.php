@@ -9,10 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
-
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +24,8 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'role_id',
+        'created_by'
     ];
 
     /**
@@ -84,11 +87,11 @@ class User extends Authenticatable implements JWTSubject
     //   return false;
     // }
 
-    // public function hasRole($role)
-    // {
-    //   if ($this->roles()->where('name', $role)->first()) {
-    //     return true;
-    //   }
-    //   return false;
-    // }
+    public function hasRole($role)
+    {
+        if ($this->role()->where('name', $role)->first()) {
+            return true;
+        }
+        return false;
+    }
 }

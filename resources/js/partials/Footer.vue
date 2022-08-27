@@ -1,23 +1,16 @@
 <template>
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
-                    Made with ❤️ by
-                    <a href="https://saimain.github.io" target="_blank"
-                        >Sai Main</a
-                    >
-                </div>
-                <div class="col-md-6">
-                    <div class="text-md-end footer-links d-none d-sm-block">
-                        <a href="javascript:void(0);">About Us</a>
-                        <a href="javascript:void(0);">Help</a>
-                        <a href="javascript:void(0);">Contact Us</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- partial:partials/_footer.html -->
+    <footer
+        class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small"
+    >
+        <p class="text-muted mb-1 mb-md-0">
+            Copyright © 2022
+            <a href="https://sprintconnection.co" target="_blank"
+                >Sprint Connection</a
+            >.
+        </p>
     </footer>
+    <!-- partial -->
 </template>
 
 <script>

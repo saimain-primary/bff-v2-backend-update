@@ -1,369 +1,339 @@
 <template>
-    <div class="navbar-custom">
-        <ul class="list-unstyled topnav-menu float-end mb-0">
-            <li class="d-none d-lg-block">
-                <form class="app-search">
-                    <div class="app-search-box">
-                        <div class="input-group">
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Search..."
-                                id="top-search"
-                            />
-                            <button class="btn input-group-text" type="submit">
-                                <i class="fe-search"></i>
-                            </button>
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar">
+        <a href="#" class="sidebar-toggler">
+            <i data-feather="menu"></i>
+        </a>
+        <div class="navbar-content">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="appsDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        <i data-feather="grid"></i>
+                    </a>
+                    <div
+                        class="dropdown-menu p-0"
+                        aria-labelledby="appsDropdown"
+                    >
+                        <div
+                            class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom"
+                        >
+                            <p class="mb-0 fw-bold">Web Apps</p>
+                            <a href="javascript:;" class="text-muted">Edit</a>
+                        </div>
+                        <div class="row g-0 p-1">
+                            <div class="col-3 text-center">
+                                <a
+                                    href="pages/apps/chat.html"
+                                    class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"
+                                    ><i
+                                        data-feather="message-square"
+                                        class="icon-lg mb-1"
+                                    ></i>
+                                    <p class="tx-12">Chat</p></a
+                                >
+                            </div>
+                            <div class="col-3 text-center">
+                                <a
+                                    href="pages/apps/calendar.html"
+                                    class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"
+                                    ><i
+                                        data-feather="calendar"
+                                        class="icon-lg mb-1"
+                                    ></i>
+                                    <p class="tx-12">Calendar</p></a
+                                >
+                            </div>
+                            <div class="col-3 text-center">
+                                <a
+                                    href="pages/email/inbox.html"
+                                    class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"
+                                    ><i
+                                        data-feather="mail"
+                                        class="icon-lg mb-1"
+                                    ></i>
+                                    <p class="tx-12">Email</p></a
+                                >
+                            </div>
+                            <div class="col-3 text-center">
+                                <a
+                                    href="pages/general/profile.html"
+                                    class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"
+                                    ><i
+                                        data-feather="instagram"
+                                        class="icon-lg mb-1"
+                                    ></i>
+                                    <p class="tx-12">Profile</p></a
+                                >
+                            </div>
                         </div>
                         <div
-                            class="dropdown-menu dropdown-lg"
-                            id="search-dropdown"
+                            class="px-3 py-2 d-flex align-items-center justify-content-center border-top"
                         >
-                            <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h5 class="text-overflow mb-2">
-                                    Found 22 results
-                                </h5>
-                            </div>
-
-                            <!-- item-->
-                            <a
-                                href="javascript:void(0);"
-                                class="dropdown-item notify-item"
-                            >
-                                <i class="fe-home me-1"></i>
-                                <span>Analytics Report</span>
-                            </a>
-
-                            <!-- item-->
-                            <a
-                                href="javascript:void(0);"
-                                class="dropdown-item notify-item"
-                            >
-                                <i class="fe-aperture me-1"></i>
-                                <span>How can I help you?</span>
-                            </a>
-
-                            <!-- item-->
-                            <a
-                                href="javascript:void(0);"
-                                class="dropdown-item notify-item"
-                            >
-                                <i class="fe-settings me-1"></i>
-                                <span>User profile settings</span>
-                            </a>
-
-                            <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h6 class="text-overflow mb-2 text-uppercase">
-                                    Users
-                                </h6>
-                            </div>
-
-                            <div class="notification-list">
-                                <!-- item-->
-                                <a
-                                    href="javascript:void(0);"
-                                    class="dropdown-item notify-item"
-                                >
-                                    <div class="d-flex align-items-start">
-                                        <img
-                                            class="d-flex me-2 rounded-circle"
-                                            src="assets/images/users/user-2.jpg"
-                                            alt="Generic placeholder image"
-                                            height="32"
-                                        />
-                                        <div class="w-100">
-                                            <h5 class="m-0 font-14">
-                                                Erwin E. Brown
-                                            </h5>
-                                            <span class="font-12 mb-0"
-                                                >UI Designer</span
-                                            >
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <!-- item-->
-                                <a
-                                    href="javascript:void(0);"
-                                    class="dropdown-item notify-item"
-                                >
-                                    <div class="d-flex align-items-start">
-                                        <img
-                                            class="d-flex me-2 rounded-circle"
-                                            src="assets/images/users/user-5.jpg"
-                                            alt="Generic placeholder image"
-                                            height="32"
-                                        />
-                                        <div class="w-100">
-                                            <h5 class="m-0 font-14">
-                                                Jacob Deo
-                                            </h5>
-                                            <span class="font-12 mb-0"
-                                                >Developer</span
-                                            >
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+                            <a href="javascript:;">View all</a>
                         </div>
                     </div>
-                </form>
-            </li>
-
-            <li class="dropdown d-inline-block d-lg-none">
-                <a
-                    class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    role="button"
-                    aria-haspopup="false"
-                    aria-expanded="false"
-                >
-                    <i class="fe-search noti-icon"></i>
-                </a>
-                <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
-                    <form class="p-3">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Search ..."
-                            aria-label="Recipient's username"
-                        />
-                    </form>
-                </div>
-            </li>
-
-            <li class="dropdown notification-list topbar-dropdown">
-                <a
-                    class="nav-link dropdown-toggle waves-effect waves-light"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    role="button"
-                    aria-haspopup="false"
-                    aria-expanded="false"
-                >
-                    <i class="fe-bell noti-icon"></i>
-                    <span class="badge bg-danger rounded-circle noti-icon-badge"
-                        >9</span
-                    >
-                </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-lg">
-                    <!-- item-->
-                    <div class="dropdown-item noti-title">
-                        <h5 class="m-0">
-                            <span class="float-end">
-                                <a href="" class="text-dark">
-                                    <small>Clear All</small>
-                                </a> </span
-                            >Notification
-                        </h5>
-                    </div>
-
-                    <div class="noti-scroll" data-simplebar>
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item active"
-                        >
-                            <div class="notify-icon">
-                                <img
-                                    src="assets/images/users/user-1.jpg"
-                                    class="img-fluid rounded-circle"
-                                    alt=""
-                                />
-                            </div>
-                            <p class="notify-details">Cristina Pride</p>
-                            <p class="text-muted mb-0 user-msg">
-                                <small
-                                    >Hi, How are you? What about our next
-                                    meeting</small
-                                >
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon bg-primary">
-                                <i class="mdi mdi-comment-account-outline"></i>
-                            </div>
-                            <p class="notify-details">
-                                Caleb Flakelar commented on Admin
-                                <small class="text-muted">1 min ago</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon">
-                                <img
-                                    src="assets/images/users/user-4.jpg"
-                                    class="img-fluid rounded-circle"
-                                    alt=""
-                                />
-                            </div>
-                            <p class="notify-details">Karen Robinson</p>
-                            <p class="text-muted mb-0 user-msg">
-                                <small
-                                    >Wow ! this admin looks good and awesome
-                                    design</small
-                                >
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon bg-warning">
-                                <i class="mdi mdi-account-plus"></i>
-                            </div>
-                            <p class="notify-details">
-                                New user registered.
-                                <small class="text-muted">5 hours ago</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon bg-info">
-                                <i class="mdi mdi-comment-account-outline"></i>
-                            </div>
-                            <p class="notify-details">
-                                Caleb Flakelar commented on Admin
-                                <small class="text-muted">4 days ago</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon bg-secondary">
-                                <i class="mdi mdi-heart"></i>
-                            </div>
-                            <p class="notify-details">
-                                Carlos Crouch liked
-                                <b>Admin</b>
-                                <small class="text-muted">13 days ago</small>
-                            </p>
-                        </a>
-                    </div>
-
-                    <!-- All-->
+                </li>
+                <li class="nav-item dropdown">
                     <a
-                        href="javascript:void(0);"
-                        class="dropdown-item text-center text-primary notify-item notify-all"
-                    >
-                        View all
-                        <i class="fe-arrow-right"></i>
-                    </a>
-                </div>
-            </li>
-
-            <li class="dropdown notification-list topbar-dropdown">
-                <a
-                    class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    role="button"
-                    aria-haspopup="false"
-                    aria-expanded="false"
-                >
-                    <span class="pro-user-name ms-1">
-                        {{ user.name }} <i class="mdi mdi-chevron-down"></i>
-                    </span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end profile-dropdown">
-                    <!-- item-->
-                    <div class="dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">Welcome !</h6>
-                    </div>
-
-                    <!-- item-->
-                    <a
-                        href="contacts-profile.html"
-                        class="dropdown-item notify-item"
-                    >
-                        <i class="fe-user"></i>
-                        <span>My Account</span>
-                    </a>
-
-                    <!-- item-->
-                    <a
-                        href="auth-lock-screen.html"
-                        class="dropdown-item notify-item"
-                    >
-                        <i class="fe-lock"></i>
-                        <span>Lock Screen</span>
-                    </a>
-
-                    <div class="dropdown-divider"></div>
-
-                    <!-- item-->
-                    <a
+                        class="nav-link dropdown-toggle"
                         href="#"
-                        @click="logout"
-                        class="dropdown-item notify-item"
+                        id="messageDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
                     >
-                        <i class="fe-log-out"></i>
-                        <span>Logout</span>
+                         <vue-feather type="mail"></vue-feather>
                     </a>
-                </div>
-            </li>
-        </ul>
-
-        <!-- LOGO -->
-        <div class="logo-box">
-            <a href="/" class="logo logo-light text-center">
-                <!-- <span class="logo-sm">
-                    <img src="assets/images/logo-sm.png" alt="" height="22" />
-                </span>
-                <span class="logo-lg">
-                    <img
-                        src="assets/images/logo-light.png"
-                        alt=""
-                        height="16"
-                    />
-                </span> -->
-                Hotel Admin
-            </a>
-            <a href="index.html" class="logo logo-dark text-center">
-                <span class="logo-sm">
-                    <img src="assets/images/logo-sm.png" alt="" height="22" />
-                </span>
-                <span class="logo-lg">
-                    <img src="assets/images/logo-dark.png" alt="" height="16" />
-                </span>
-            </a>
+                    <div
+                        class="dropdown-menu p-0"
+                        aria-labelledby="messageDropdown"
+                    >
+                        <div
+                            class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom"
+                        >
+                            <p>9 New Messages</p>
+                            <a href="javascript:;" class="text-muted"
+                                >Clear all</a
+                            >
+                        </div>
+                        <div class="p-1">
+                            <a
+                                href="javascript:;"
+                                class="dropdown-item d-flex align-items-center py-2"
+                            >
+                                <div class="me-3">
+                                    <img
+                                        class="wd-30 ht-30 rounded-circle"
+                                        src="https://via.placeholder.com/30x30"
+                                        alt="userr"
+                                    />
+                                </div>
+                                <div
+                                    class="d-flex justify-content-between flex-grow-1"
+                                >
+                                    <div class="me-4">
+                                        <p>Leonardo Payne</p>
+                                        <p class="tx-12 text-muted">
+                                            Project status
+                                        </p>
+                                    </div>
+                                    <p class="tx-12 text-muted">2 min ago</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div
+                            class="px-3 py-2 d-flex align-items-center justify-content-center border-top"
+                        >
+                            <a href="javascript:;">View all</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="notificationDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                         <vue-feather type="bell"></vue-feather>
+                        <div class="indicator">
+                            <div class="circle"></div>
+                        </div>
+                    </a>
+                    <div
+                        class="dropdown-menu p-0"
+                        aria-labelledby="notificationDropdown"
+                    >
+                        <div
+                            class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom"
+                        >
+                            <p>6 New Notifications</p>
+                            <a href="javascript:;" class="text-muted"
+                                >Clear all</a
+                            >
+                        </div>
+                        <div class="p-1">
+                            <a
+                                href="javascript:;"
+                                class="dropdown-item d-flex align-items-center py-2"
+                            >
+                                <div
+                                    class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"
+                                >
+                                    <i
+                                        class="icon-sm text-white"
+                                        data-feather="gift"
+                                    ></i>
+                                </div>
+                                <div class="flex-grow-1 me-2">
+                                    <p>New Order Recieved</p>
+                                    <p class="tx-12 text-muted">30 min ago</p>
+                                </div>
+                            </a>
+                            <a
+                                href="javascript:;"
+                                class="dropdown-item d-flex align-items-center py-2"
+                            >
+                                <div
+                                    class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"
+                                >
+                                    <i
+                                        class="icon-sm text-white"
+                                        data-feather="alert-circle"
+                                    ></i>
+                                </div>
+                                <div class="flex-grow-1 me-2">
+                                    <p>Server Limit Reached!</p>
+                                    <p class="tx-12 text-muted">1 hrs ago</p>
+                                </div>
+                            </a>
+                            <a
+                                href="javascript:;"
+                                class="dropdown-item d-flex align-items-center py-2"
+                            >
+                                <div
+                                    class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"
+                                >
+                                    <img
+                                        class="wd-30 ht-30 rounded-circle"
+                                        src="https://via.placeholder.com/30x30"
+                                        alt="userr"
+                                    />
+                                </div>
+                                <div class="flex-grow-1 me-2">
+                                    <p>New customer registered</p>
+                                    <p class="tx-12 text-muted">2 sec ago</p>
+                                </div>
+                            </a>
+                            <a
+                                href="javascript:;"
+                                class="dropdown-item d-flex align-items-center py-2"
+                            >
+                                <div
+                                    class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"
+                                >
+                                    <i
+                                        class="icon-sm text-white"
+                                        data-feather="layers"
+                                    ></i>
+                                </div>
+                                <div class="flex-grow-1 me-2">
+                                    <p>Apps are ready for update</p>
+                                    <p class="tx-12 text-muted">5 hrs ago</p>
+                                </div>
+                            </a>
+                            <a
+                                href="javascript:;"
+                                class="dropdown-item d-flex align-items-center py-2"
+                            >
+                                <div
+                                    class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3"
+                                >
+                                    <i
+                                        class="icon-sm text-white"
+                                        data-feather="download"
+                                    ></i>
+                                </div>
+                                <div class="flex-grow-1 me-2">
+                                    <p>Download completed</p>
+                                    <p class="tx-12 text-muted">6 hrs ago</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div
+                            class="px-3 py-2 d-flex align-items-center justify-content-center border-top"
+                        >
+                            <a href="javascript:;">View all</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="profileDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        <img
+                            class="wd-30 ht-30 rounded-circle"
+                            :src="getProfilePhoto(user.name)"
+                            alt="profile"
+                        />
+                    </a>
+                    <div
+                        class="dropdown-menu p-0"
+                        aria-labelledby="profileDropdown"
+                    >
+                        <div
+                            class="d-flex flex-column align-items-center border-bottom px-5 py-3"
+                        >
+                            <div class="mb-3">
+                                <img
+                                    class="wd-80 ht-80 rounded-circle"
+                                    :src="getProfilePhoto(user.name)"
+                                    alt=""
+                                />
+                            </div>
+                            <div class="text-center">
+                                <p class="tx-16 fw-bolder">{{ user.name }}</p>
+                                <p class="tx-12 text-muted">
+                                    {{ user.email }}
+                                </p>
+                            </div>
+                        </div>
+                        <ul class="list-unstyled p-1">
+                            <li class="dropdown-item py-2">
+                                <a
+                                    href="pages/general/profile.html"
+                                    class="text-body ms-0"
+                                >
+                                    <span>Profile</span>
+                                </a>
+                            </li>
+                            <li class="dropdown-item py-2">
+                                <a href="javascript:;" class="text-body ms-0">
+                                    <span>Edit Profile</span>
+                                </a>
+                            </li>
+                            <li class="dropdown-item py-2">
+                                <a href="javascript:;" class="text-body ms-0">
+                                    <span>Switch User</span>
+                                </a>
+                            </li>
+                            <li
+                                class="dropdown-item py-2"
+                                @click.prevent="logout"
+                            >
+                                <a
+                                    href="#"
+                                    @click.prevent="logout"
+                                    class="text-body ms-0"
+                                >
+                                    <span>Log Out</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
         </div>
-
-        <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
-            <li>
-                <button class="button-menu-mobile disable-btn waves-effect">
-                    <i class="fe-menu"></i>
-                </button>
-            </li>
-
-            <li>
-                <h4 class="page-title-main">Starter</h4>
-            </li>
-        </ul>
-
-        <div class="clearfix"></div>
-    </div>
+    </nav>
+    <!-- partial -->
 </template>
 
 <script>
@@ -379,7 +349,11 @@ export default {
         ...mapActions({
             signOut: "logout",
         }),
+        getProfilePhoto(userName) {
+            return `https://ui-avatars.com/api/?background=6572FE&color=fff&name=${userName}`;
+        },
         logout() {
+            console.log("logout from account");
             axios
                 .post("api/logout")
                 .then((res) => {
@@ -392,6 +366,7 @@ export default {
                 });
         },
     },
+    mounted() {},
 };
 </script>
 

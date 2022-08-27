@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AdminController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\PostController;
 use Illuminate\Http\Request;
@@ -20,4 +21,11 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('register', 'register');
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
+});
+
+
+Route::group(['middleware' => ['auth:api','role:SUPER_ADMIN']], function () {
+    Route::get('admins', [AdminController::class,'index']);
+    Route::post('admins', [AdminController::class,'create']);
+    Route::put('admins/{id}', [AdminController::class,'update']);
 });

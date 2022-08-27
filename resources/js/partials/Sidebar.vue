@@ -1,77 +1,74 @@
 <template>
-    <div class="left-side-menu">
-        <div class="h-100" data-simplebar>
-            <div id="sidebar-menu">
-                <ul id="side-menu">
-                    <li class="menu-title">Welcome</li>
+    <!-- partial:partials/_sidebar.html -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="sidebar-brand"> Noble<span>UI</span> </a>
+            <div class="sidebar-toggler not-active">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="sidebar-body">
+            <ul class="nav">
+                <li class="nav-item nav-category">Main</li>
+                <li class="nav-item" :class="{'active': isActiveRoute('/')}">
+                    <router-link to="/" class="nav-link">
+                         <vue-feather
+                                class="link-icon"
+                                type="box"
+                            ></vue-feather>
+                        <span class="link-title">Dashboard</span>
+                    </router-link>
+                </li>
 
-                    <li>
-                        <router-link to="/" class="nav-item nav-link">
-                            <i class="mdi mdi-view-dashboard-outline"></i>
-                            <span
-                                class="badge bg-success rounded-pill float-end"
-                                >9+</span
-                            >
-                            <span> Dashboard </span></router-link
+                <template v-if="user.role === 'SUPER_ADMIN'">
+                    <li class="nav-item nav-category">Admins</li>
+                    <li class="nav-item" :class="{'active': isActiveRoute('/admins')}">
+                        <router-link to="/admins" class="nav-link">
+                            <vue-feather
+                                class="link-icon"
+                                type="list"
+                            ></vue-feather>
+                            <span class="link-title">List</span></router-link
                         >
                     </li>
-
-                    <li v-if="user.role !== 'CLIENT'" class="menu-title mt-2">
-                        Account Management
+                    <li class="nav-item" :class="{'active': isActiveRoute('/admins/add')}">
+                        <router-link to="/admins/add" class="nav-link">
+                            <vue-feather
+                                class="link-icon"
+                                type="plus"
+                            ></vue-feather>
+                            <span class="link-title">Add</span></router-link
+                        >
                     </li>
+                </template>
 
-                    <template v-if="user.role === 'SUPER_ADMIN'">
-                        <li>
-                            <a href="#admin" data-bs-toggle="collapse">
-                                <i class="mdi mdi-account-group-outline"></i>
-                                <span> Admins </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="admin">
-                                <ul class="nav-second-level">
-                                    <li>
-                                        <router-link to="/admins/add"
-                                            >Add</router-link
-                                        >
-                                    </li>
-                                    <li>
-                                        <router-link to="/admins"
-                                            >List</router-link
-                                        >
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </template>
+                <template v-if="user.role === 'ADMIN'">
+                    <li class="nav-item nav-category">Clients</li>
+                    <li class="nav-item" :class="{'active': isActiveRoute('/clients')}">
+                        <router-link to="/clients" class="nav-link">
+                            <vue-feather
+                                class="link-icon"
+                                type="list"
+                            ></vue-feather>
 
-                    <template v-if="user.role === 'ADMIN'">
-                        <li>
-                            <a href="#client" data-bs-toggle="collapse">
-                                <i class="mdi mdi-account-group-outline"></i>
-                                <span> Clients </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="client">
-                                <ul class="nav-second-level">
-                                    <li>
-                                        <router-link to="/clients/add"
-                                            >Add</router-link
-                                        >
-                                    </li>
-                                    <li>
-                                        <router-link to="/clients"
-                                            >List</router-link
-                                        >
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </template>
-                </ul>
-            </div>
-            <div class="clearfix"></div>
+                            <span class="link-title">List</span></router-link
+                        >
+                    </li>
+                    <li class="nav-item" :class="{'active': isActiveRoute('/clients/add')}">
+                        <router-link to="/clients/add" class="nav-link">
+                            <vue-feather
+                                class="link-icon"
+                                type="plus"
+                            ></vue-feather>
+                            <span class="link-title">Add</span></router-link
+                        >
+                    </li>
+                </template>
+            </ul>
         </div>
-    </div>
+    </nav>
 </template>
 
 <script>
@@ -81,6 +78,16 @@ export default {
             user: this.$store.state.user.data.user,
         };
     },
+    methods: {
+        isActiveRoute(path){
+            if(this.$route.path === path){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    },
+  
 };
 </script>
 
