@@ -5,7 +5,7 @@ namespace App\Http\Requests\API;
 use Illuminate\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateAdminRequest extends FormRequest
+class CreateAccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

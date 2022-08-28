@@ -12,10 +12,34 @@
 							</div>
 						</div>
 						<div v-else>
+							<div
+								v-if="isShowDeleteAlert"
+								class="alert alert-danger"
+								role="alert"
+							>
+								<b>Warning : </b> Are you sure you want to delete account of
+								<span class="text-decoration-underline">{{
+									deleteData?.name
+								}}</span>
+								?
+								<button
+									@click.prevent="confirmDeleteData()"
+									class="btn btn-danger btn-xs ms-2"
+								>
+									Yes, delete it
+								</button>
+								<button
+									@click.prevent="cancelDeleteData()"
+									class="btn btn-outline-danger btn-xs ms-2"
+								>
+									No, cancel it
+								</button>
+							</div>
 							<div class="table-responsive">
 								<table class="table fs-6">
 									<thead>
 										<tr>
+											<th>No.</th>
 											<th>Name</th>
 											<th>Email</th>
 											<th>Created By</th>
@@ -27,11 +51,14 @@
 									<tbody>
 										<tr v-for="d in data" :key="d.id">
 											<td>
+												{{ d.id }}
+											</td>
+											<td>
 												{{ d.name }}
 											</td>
 											<td>{{ d.email }}</td>
 											<td>
-												{{ d.created_by?.name }}
+												{{ d.created_by ? d.created_by.name : "-" }}
 											</td>
 											<td>{{ d.created_at }}</td>
 											<td>{{ d.updated_at }}</td>
@@ -44,7 +71,12 @@
 														stroke-width="2"
 													></vue-feather>
 												</router-link>
-												<router-link to="/">
+												<router-link
+													:to="{
+														name: 'edit_admin',
+														params: { id: d.id },
+													}"
+												>
 													<vue-feather
 														class="text-primary me-2"
 														type="edit-2"
@@ -52,14 +84,18 @@
 														stroke-width="2"
 													></vue-feather>
 												</router-link>
-												<router-link to="/">
+												<a
+													href="#"
+													class=""
+													@click.prevent="showDeleteAlert(d)"
+												>
 													<vue-feather
 														class="text-primary"
 														type="trash"
 														size="18px"
 														stroke-width="2"
 													></vue-feather>
-												</router-link>
+												</a>
 											</td>
 										</tr>
 									</tbody>
@@ -95,7 +131,7 @@
 									<li
 										class="page-item"
 										:class="{
-											disabled: pagination.current_page < pagination.last_page,
+											disabled: pagination.current_page <= pagination.last_page,
 										}"
 									>
 										<a
@@ -125,10 +161,11 @@ export default {
 	data() {
 		return {
 			isLoading: false,
+			isShowDeleteAlert: false,
+			deleteData: null,
 			data: [],
 			paginationParams: {
 				page: 1,
-				perPage: 10,
 			},
 			pagination: {},
 			offset: 1,
@@ -139,7 +176,6 @@ export default {
 			return this.pagination.current_page;
 		},
 		pagesNumber: function () {
-			console.log("to", this.pagination.to);
 			if (!this.pagination.to) {
 				return [];
 			}
@@ -148,9 +184,6 @@ export default {
 				from = 1;
 			}
 			var to = from + this.offset * 2;
-			console.log("*", to);
-			console.log("last", this.pagination.last_page);
-			console.log("*", to);
 			if (to >= this.pagination.last_page) {
 				to = this.pagination.last_page;
 			}
@@ -166,6 +199,7 @@ export default {
 	methods: {
 		...mapActions({
 			getAdminListAction: "getAdminListAction",
+			deleteAdminAction: "deleteAdminAction",
 		}),
 		changePage: async function (page) {
 			this.isLoading = true;
@@ -183,8 +217,26 @@ export default {
 					current_page: result.data.results.current_page,
 					last_page: result.data.results.last_page,
 				};
-				console.log(result.data.results);
 			}
+		},
+		showDeleteAlert: async function (data) {
+			this.isShowDeleteAlert = true;
+			this.deleteData = data;
+		},
+		confirmDeleteData: async function () {
+			this.isLoading = true;
+			const result = await this.deleteAdminAction(this.deleteData.id);
+			if (result.success === true) {
+				const i = this.data.map((item) => item.id).indexOf(this.deleteData.id); // find index of your object
+				this.data.splice(i, 1); // remove it from array
+				this.isLoading = false;
+				this.deleteData = null;
+				this.isShowDeleteAlert = false;
+			}
+		},
+		cancelDeleteData: function () {
+			this.deleteData = null;
+			this.isShowDeleteAlert = false;
 		},
 	},
 	async mounted() {
@@ -201,7 +253,6 @@ export default {
 				current_page: result.data.results.current_page,
 				last_page: result.data.results.last_page,
 			};
-			console.log(result.data.results);
 		}
 	},
 };

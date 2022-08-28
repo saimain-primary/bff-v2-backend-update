@@ -16,46 +16,51 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // Role::create([
+        //     'slug' => "super-admins",
+        //     'name' => "SUPER_ADMIN",
+        //     'description' => "Have access to manage the information of Admin and Client"
+        // ]);
 
-        Role::create([
-            'name' => "SUPER_ADMIN",
-            'description' => "Have access to manage the information of Admin and Client"
-        ]);
+        // Role::create([
+        //     'slug' => "admins",
+        //     'name' => "ADMIN",
+        //     'description' => "Have access to manage the information of Client"
+        // ]);
 
-        Role::create([
-            'name' => "ADMIN",
-            'description' => "Have access to manage the information of Client"
-        ]);
+        // Role::create([
+        //     'slug' => "clients",
+        //     'name' => "CLIENT",
+        //     'description' => "Have access to Client Dashboard"
+        // ]);
 
-        Role::create([
-            'name' => "CLIENT",
-            'description' => "Have access to Client Dashboard"
-        ]);
-
-        $superAdmin = User::create([
-            'name' => "Super Admin",
-            'email' => "super.admin@gmail.com",
-            'password' => Hash::make("password"),
-            'role_id' => 1
-        ]);
+        // $superAdmin = User::create([
+        //     'name' => "Super Admin",
+        //     'email' => "super.admin@gmail.com",
+        //     'password' => Hash::make("password"),
+        //     'role_id' => 1
+        // ]);
 
 
-
-        $admin = User::create([
-            'name' => "Admin",
-            'email' => "admin@gmail.com",
-            'password' => Hash::make("password"),
-            'role_id' => 2
-        ]);
-
-        $client = User::create([
-            'name' => "Client",
-            'email' => "client@gmail.com",
-            'password' => Hash::make("password"),
-            'role_id' => 3
-        ]);
+        // $admin = User::create([
+        //     'name' => "Admin",
+        //     'email' => "admin@gmail.com",
+        //     'password' => Hash::make("password"),
+        //     'role_id' => 2
+        // ]);
 
 
 
+        // $client = User::create([
+        //     'name' => "Client",
+        //     'email' => "client@gmail.com",
+        //     'password' => Hash::make("password"),
+        //     'role_id' => 3
+        // ]);
+
+
+        User::factory()
+                    ->count(50)
+                    ->create();
     }
 }

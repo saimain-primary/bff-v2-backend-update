@@ -1,8 +1,12 @@
 import { createWebHistory, createRouter } from "vue-router";
 import AdminList from "./pages/admins/AdminList.vue";
 import AddAdmin from "./pages/admins/AddAdmin.vue";
+import EditAdmin from "./pages/admins/EditAdmin.vue";
+
 import ClientList from "./pages/clients/ClientList.vue";
 import AddClient from "./pages/clients/AddClient.vue";
+import EditClient from "./pages/clients/EditClient.vue";
+
 import Dashboard from "./pages/Dashboard.vue";
 import Login from "./pages/auth/Login.vue";
 import store from "./store";
@@ -46,6 +50,15 @@ const routes = [
         },
     },
     {
+        name: "edit_admin",
+        path: "/admins/edit/:id",
+        component: EditAdmin,
+        meta: {
+            title: `Edit Admin account`,
+            middleware: "super_admin",
+        },
+    },
+    {
         name: "clients",
         path: "/clients",
         component: ClientList,
@@ -60,6 +73,15 @@ const routes = [
         component: AddClient,
         meta: {
             title: `Add Client`,
+            middleware: "admin",
+        },
+    },
+    {
+        name: "edit_client",
+        path: "/clients/edit/:id",
+        component: EditClient,
+        meta: {
+            title: `Edit Client account`,
             middleware: "admin",
         },
     },

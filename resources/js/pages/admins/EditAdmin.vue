@@ -4,10 +4,10 @@
 			<div class="col grid-margin stretch-card">
 				<div class="card">
 					<div class="card-body">
-						<h6 class="card-title">Create New Client</h6>
+						<h6 class="card-title">Edit Admin</h6>
 						<div class="alert alert-primary" role="alert">
-							<b>Note :</b> The Client account will have access to manage Hotel
-							Information
+							<b>Note :</b> The Admin account will have access to manage Client
+							( Service Provider )
 						</div>
 						<form class="forms-sample" @submit.prevent="submit">
 							<div class="mb-3">
@@ -44,7 +44,7 @@
 								>
 							</div>
 							<div class="mb-3">
-								<label for="password" class="form-label">Password</label>
+								<label for="password" class="form-label">New Password</label>
 								<input
 									type="text"
 									class="form-control"
@@ -62,7 +62,7 @@
 							</div>
 							<div class="mb-3">
 								<label for="confirm_password" class="form-label"
-									>Confirm Password</label
+									>Confirm New Password</label
 								>
 								<input
 									type="text"
@@ -84,7 +84,7 @@
 								class="btn btn-primary me-2"
 								:disabled="isLoading"
 							>
-								{{ isLoading ? "Please wait..." : "Create" }}
+								{{ isLoading ? "Please wait..." : "Update" }}
 							</button>
 						</form>
 					</div>
@@ -103,28 +103,28 @@ export default {
 	data() {
 		return {
 			isLoading: false,
-			formData: {
-				name: "",
-				email: "",
-				password: "",
-				password_confirmation: "",
-			},
+			formData: {},
 			errors: {},
 		};
 	},
 	methods: {
 		...mapActions({
-			createNewClientAction: "createNewClientAction",
+			getAdminEditAction: "getAdminEditAction",
+			updateAdminAction: "updateAdminAction",
 		}),
 		async submit() {
 			this.isLoading = true;
-			await this.createNewClientAction(this.formData)
+			await this.updateAdminAction({
+				id: this.$route.params.id,
+				data: this.formData,
+			})
 				.then((res) => {
 					console.log(res);
 					this.isLoading = false;
 					if (res.success === false) {
 						this.errors = res.errors;
 					} else if (res.success === true) {
+						this.getEditDetail();
 						this.formData = {};
 					}
 				})
@@ -133,7 +133,18 @@ export default {
 					this.isLoading = false;
 				});
 		},
+		async getEditDetail() {
+			const result = await this.getAdminEditAction(this.$route.params.id);
+			console.log("r", result.data.results);
+			if (result.success === false) {
+				this.$router.push("/admins");
+			} else {
+				this.formData = result.data.results;
+			}
+		},
 	},
-	mounted() {},
+	created() {
+		this.getEditDetail();
+	},
 };
 </script>

@@ -5,6 +5,19 @@
 			<vue-feather type="menu"></vue-feather>
 		</a>
 		<div class="navbar-content">
+			<form class="search-form mb-0">
+				<div class="input-group">
+					<div class="input-group-text">
+						<vue-feather type="search"></vue-feather>
+					</div>
+					<input
+						type="text"
+						class="form-control"
+						id="navbarForm"
+						placeholder="Search here..."
+					/>
+				</div>
+			</form>
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown">
 					<a
@@ -436,7 +449,7 @@ export default {
 		logout() {
 			console.log("logout from account");
 			axios
-				.post("api/logout")
+				.post("/api/logout")
 				.then((res) => {
 					localStorage.removeItem("token");
 					this.signOut();

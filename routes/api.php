@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\API\AdminController;
+use App\Http\Controllers\API\AccountController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\PostController;
 use Illuminate\Http\Request;
@@ -25,9 +25,18 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
-
 Route::group(['middleware' => ['auth:api','role:SUPER_ADMIN']], function () {
-    Route::get('admins', [AdminController::class,'index']);
-    Route::post('admins', [AdminController::class,'create']);
-    Route::put('admins/{id}', [AdminController::class,'update']);
+    Route::get('admins', [AccountController::class,'index'])->name('admins.index');
+    Route::get('admins/{id}', [AccountController::class,'edit'])->name('admins.edit');
+    Route::post('admins', [AccountController::class,'create'])->name('admins.create');
+    Route::put('admins/{id}', [AccountController::class,'update'])->name('admins.update');
+    Route::delete('admins/{id}', [AccountController::class,'delete'])->name('admins.delete');
+});
+
+Route::group(['middleware' => ['auth:api','role:ADMIN']], function () {
+    Route::get('clients', [AccountController::class,'index'])->name('clients.index');
+    Route::get('clients/{id}', [AccountController::class,'edit'])->name('clients.edit');
+    Route::post('clients', [AccountController::class,'create'])->name('clients.create');
+    Route::put('clients/{id}', [AccountController::class,'update'])->name('clients.update');
+    Route::delete('clients/{id}', [AccountController::class,'delete'])->name('clients.delete');
 });

@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class UpdateAdminRequest extends FormRequest
+class UpdateAccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,12 @@ class UpdateAdminRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => 'required',
-            "email" => 'required|unique:users',
-            "password" => 'required'
+            'email' =>[
+                Rule::unique('users')->ignore($this->id),
+            ],
+            'password' => [
+                'confirmed'
+            ]
         ];
     }
 }
