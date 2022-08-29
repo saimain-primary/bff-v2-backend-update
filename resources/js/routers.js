@@ -7,6 +7,7 @@ import ClientList from "./pages/clients/ClientList.vue";
 import AddClient from "./pages/clients/AddClient.vue";
 import EditClient from "./pages/clients/EditClient.vue";
 
+import ActivityLogs from "./pages/logs/Activity.vue";
 import Dashboard from "./pages/Dashboard.vue";
 import Login from "./pages/auth/Login.vue";
 import store from "./store";
@@ -83,6 +84,15 @@ const routes = [
         meta: {
             title: `Edit Client account`,
             middleware: "admin",
+        },
+    },
+    {
+        name: "activity_logs",
+        path: "/activity-logs",
+        component: ActivityLogs,
+        meta: {
+            title: `Activity Logs`,
+            middleware: "super_admin",
         },
     },
 ];

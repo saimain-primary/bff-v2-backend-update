@@ -36,6 +36,16 @@
 							<span class="link-title">Add</span></router-link
 						>
 					</li>
+					<li class="nav-item nav-category">Logs</li>
+					<li
+						class="nav-item"
+						:class="{ active: isActiveRoute('/activity-logs') }"
+					>
+						<router-link to="/activity-logs" class="nav-link">
+							<vue-feather class="link-icon" type="git-branch"></vue-feather>
+							<span class="link-title">Activity</span></router-link
+						>
+					</li>
 				</template>
 
 				<template v-if="user.role === 'ADMIN'">

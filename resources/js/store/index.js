@@ -50,6 +50,7 @@ const store = createStore({
                 commit("SET_AUTHENTICATED", false);
             }
         },
+
         logout({ commit }) {
             commit("SET_USER", {});
             commit("SET_AUTHENTICATED", false);
@@ -263,6 +264,7 @@ const store = createStore({
                 };
             }
         },
+
         async getClientEditAction({ commit }, data) {
             try {
                 const result = await axios.get("/api/clients/" + data);
@@ -331,6 +333,7 @@ const store = createStore({
                 }
             }
         },
+
         async updateClientAction({ commit }, data) {
             try {
                 const result = await axios.put(
