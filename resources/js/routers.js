@@ -3,9 +3,9 @@ import AdminList from "./pages/admins/AdminList.vue";
 import AddAdmin from "./pages/admins/AddAdmin.vue";
 import EditAdmin from "./pages/admins/EditAdmin.vue";
 
-import ClientList from "./pages/clients/ClientList.vue";
-import AddClient from "./pages/clients/AddClient.vue";
-import EditClient from "./pages/clients/EditClient.vue";
+import UserList from "./pages/users/UserList.vue";
+import AddUser from "./pages/users/AddUser.vue";
+import EditUser from "./pages/users/EditUser.vue";
 
 import ActivityLogs from "./pages/logs/Activity.vue";
 import Dashboard from "./pages/Dashboard.vue";
@@ -60,29 +60,29 @@ const routes = [
         },
     },
     {
-        name: "clients",
-        path: "/clients",
-        component: ClientList,
+        name: "users",
+        path: "/users",
+        component: UserList,
         meta: {
-            title: `Client List`,
+            title: `User List`,
             middleware: "admin",
         },
     },
     {
-        name: "add_client",
-        path: "/clients/add",
-        component: AddClient,
+        name: "add_user",
+        path: "/users/add",
+        component: AddUser,
         meta: {
-            title: `Add Client`,
+            title: `Add User`,
             middleware: "admin",
         },
     },
     {
-        name: "edit_client",
-        path: "/clients/edit/:id",
-        component: EditClient,
+        name: "edit_user",
+        path: "/users/edit/:id",
+        component: EditUser,
         meta: {
-            title: `Edit Client account`,
+            title: `Edit User account`,
             middleware: "admin",
         },
     },

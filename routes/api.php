@@ -24,7 +24,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
 });
 
-
 Route::group(['middleware' => ['auth:api','role:SUPER_ADMIN']], function () {
     Route::get('admins', [AccountController::class,'index'])->name('admins.index');
     Route::get('admins/{id}', [AccountController::class,'edit'])->name('admins.edit');
@@ -34,9 +33,9 @@ Route::group(['middleware' => ['auth:api','role:SUPER_ADMIN']], function () {
 });
 
 Route::group(['middleware' => ['auth:api','role:ADMIN']], function () {
-    Route::get('clients', [AccountController::class,'index'])->name('clients.index');
-    Route::get('clients/{id}', [AccountController::class,'edit'])->name('clients.edit');
-    Route::post('clients', [AccountController::class,'create'])->name('clients.create');
-    Route::put('clients/{id}', [AccountController::class,'update'])->name('clients.update');
-    Route::delete('clients/{id}', [AccountController::class,'delete'])->name('clients.delete');
+    Route::get('users', [AccountController::class,'index'])->name('users.index');
+    Route::get('users/{id}', [AccountController::class,'edit'])->name('users.edit');
+    Route::post('users', [AccountController::class,'create'])->name('users.create');
+    Route::put('users/{id}', [AccountController::class,'update'])->name('users.update');
+    Route::delete('users/{id}', [AccountController::class,'delete'])->name('users.delete');
 });

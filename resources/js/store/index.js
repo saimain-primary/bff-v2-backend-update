@@ -237,9 +237,9 @@ const store = createStore({
         },
 
         // Client
-        async getClientListAction({ commit }, data) {
+        async getUserListAction({ commit }, data) {
             try {
-                const result = await axios.get("/api/clients", {
+                const result = await axios.get("/api/users", {
                     params: data,
                 });
 
@@ -265,9 +265,9 @@ const store = createStore({
             }
         },
 
-        async getClientEditAction({ commit }, data) {
+        async getUserEditAction({ commit }, data) {
             try {
-                const result = await axios.get("/api/clients/" + data);
+                const result = await axios.get("/api/users/" + data);
 
                 return {
                     success: true,
@@ -290,9 +290,9 @@ const store = createStore({
             }
         },
 
-        async createNewClientAction({ commit }, data) {
+        async createNewUserAction({ commit }, data) {
             try {
-                const result = await axios.post("/api/clients", data);
+                const result = await axios.post("/api/users", data);
                 toast.success(result.data.message, {
                     transition: "Vue-Toastification__bounce",
                     hideProgressBar: true,
@@ -334,10 +334,10 @@ const store = createStore({
             }
         },
 
-        async updateClientAction({ commit }, data) {
+        async updateUserAction({ commit }, data) {
             try {
                 const result = await axios.put(
-                    "/api/clients/" + data.id,
+                    "/api/users/" + data.id,
                     data.data
                 );
                 toast.success(result.data.message, {
@@ -380,9 +380,9 @@ const store = createStore({
                 }
             }
         },
-        async deleteClientAction({ commit }, data) {
+        async deleteUserAction({ commit }, data) {
             try {
-                const result = await axios.delete("/api/clients/" + data);
+                const result = await axios.delete("/api/users/" + data);
                 toast.success(result.data.message, {
                     transition: "Vue-Toastification__bounce",
                     hideProgressBar: true,
